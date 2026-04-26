@@ -281,36 +281,6 @@
       "algorithm": "sha256"
     },
     {
-      "id": "github_release/github.com/terraform-docs/terraform-docs/v0.22.0/terraform-docs-v0.22.0-darwin-amd64.tar.gz",
-      "checksum": "797ED9AFAAAFDE69F33F8CFA00602E7C57249C63C58B014122A69726584EB8EF",
-      "algorithm": "sha256"
-    },
-    {
-      "id": "github_release/github.com/terraform-docs/terraform-docs/v0.22.0/terraform-docs-v0.22.0-darwin-arm64.tar.gz",
-      "checksum": "A8A698C8C1BD0A77189FD15A6F9AC9D99445B1E22F5376A8F7C830FA7407592D",
-      "algorithm": "sha256"
-    },
-    {
-      "id": "github_release/github.com/terraform-docs/terraform-docs/v0.22.0/terraform-docs-v0.22.0-linux-amd64.tar.gz",
-      "checksum": "8EC66616777C66F3E622AF4F2853E8AE399F38908AD4B262C9C526DD42501369",
-      "algorithm": "sha256"
-    },
-    {
-      "id": "github_release/github.com/terraform-docs/terraform-docs/v0.22.0/terraform-docs-v0.22.0-linux-arm64.tar.gz",
-      "checksum": "4FECCD471E0595546271BDE7AABD275A5C1A5B055D6CD89C2678B38CED1376F6",
-      "algorithm": "sha256"
-    },
-    {
-      "id": "github_release/github.com/terraform-docs/terraform-docs/v0.22.0/terraform-docs-v0.22.0-windows-amd64.zip",
-      "checksum": "23F6539F10EF5C34F73A7CCFEB7474EA82BC3E591E46E59C994B10F54BE83025",
-      "algorithm": "sha256"
-    },
-    {
-      "id": "github_release/github.com/terraform-docs/terraform-docs/v0.22.0/terraform-docs-v0.22.0-windows-arm64.zip",
-      "checksum": "952C3A3B28BEBB18BF7FDA8F130B4A64F567693F73E78301791BC89739560716",
-      "algorithm": "sha256"
-    },
-    {
       "id": "http/golang.org/dl/go1.26.2.darwin-amd64.tar.gz",
       "checksum": "BC3F1500D9968C36D705442D90BA91ADDF9271665033748B82532682E90A7966",
       "algorithm": "sha256"
@@ -338,31 +308,6 @@
     {
       "id": "http/golang.org/dl/go1.26.2.windows-arm64.zip",
       "checksum": "094D05CAAF6BA235E2BD570B625D064CEB65943866252722A8F3FDBA232139C6",
-      "algorithm": "sha256"
-    },
-    {
-      "id": "http/releases.hashicorp.com/terraform/1.14.9/terraform_1.14.9_darwin_amd64.zip",
-      "checksum": "C15326E1AF102D2767D40208A0157D1402057F80192991F56803B66457304CF3",
-      "algorithm": "sha256"
-    },
-    {
-      "id": "http/releases.hashicorp.com/terraform/1.14.9/terraform_1.14.9_darwin_arm64.zip",
-      "checksum": "5BC0B11B7A63C8984A41D82523356DF46F7833C2E9651A39A7F8919422DE5CDE",
-      "algorithm": "sha256"
-    },
-    {
-      "id": "http/releases.hashicorp.com/terraform/1.14.9/terraform_1.14.9_linux_amd64.zip",
-      "checksum": "2E5CFFC20A0B48A67A76268723BD5A10B8666F69B2AA4F04906E206726BEDD63",
-      "algorithm": "sha256"
-    },
-    {
-      "id": "http/releases.hashicorp.com/terraform/1.14.9/terraform_1.14.9_linux_arm64.zip",
-      "checksum": "863002085B886453795D9FF4B8989B8468784478150B70BA8A1DF3E3AD66DA99",
-      "algorithm": "sha256"
-    },
-    {
-      "id": "http/releases.hashicorp.com/terraform/1.14.9/terraform_1.14.9_windows_amd64.zip",
-      "checksum": "5518B04EA610115B17B427B57D8EC1D50A42A2AD63AB2D7A453B788D6C804D14",
       "algorithm": "sha256"
     },
     {

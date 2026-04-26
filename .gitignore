@@ -3,6 +3,3 @@ dist
 third_party_licenses
 bootstrap
 *.zip
-.terraform
-*.tfstate
-*.backup
