@@ -1,5 +1,0 @@
-terraform.tfvars
-config.yaml
-secret.yaml
-backend.tf
-.terraform.lock.hcl
