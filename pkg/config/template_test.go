@@ -268,7 +268,7 @@ Untrusted Machine Users: Nothing
 		},
 	}
 	cfg := &config.Config{
-		AWS: &config.AWS{ //nolint:gosec
+		AWS: &config.AWS{
 			SecretID: "ghwhapp",
 		},
 	}
