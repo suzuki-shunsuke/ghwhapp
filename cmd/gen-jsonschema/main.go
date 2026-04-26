@@ -5,7 +5,7 @@ import (
 	"log"
 
 	"github.com/suzuki-shunsuke/gen-go-jsonschema/jsonschema"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/config"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/config"
 )
 
 func main() {

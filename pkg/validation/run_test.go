@@ -5,8 +5,8 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/github"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/validation"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/github"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/validation"
 )
 
 func TestController_Run(t *testing.T) {

@@ -4,8 +4,8 @@ import (
 	"context"
 	"log/slog"
 
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/config"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/controller"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/config"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/controller"
 )
 
 type Server struct {

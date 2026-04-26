@@ -8,9 +8,9 @@ import (
 	"os/signal"
 	"syscall"
 
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/entrypoint"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/logging"
 	"github.com/suzuki-shunsuke/slog-error/slogerr"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/entrypoint"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/logging"
 )
 
 var version = ""

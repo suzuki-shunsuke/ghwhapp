@@ -8,7 +8,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/secretsmanager"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/secret"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/secret"
 )
 
 type SecretsManager struct {

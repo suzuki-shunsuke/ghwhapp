@@ -1,4 +1,0 @@
-# https://terraform-docs.io/
-formatter: markdown
-output:
-  file: README.md

@@ -5,7 +5,7 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/config"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/config"
 )
 
 func TestConfig_Init(t *testing.T) { //nolint:gocognit,cyclop
@@ -26,8 +26,8 @@ func TestConfig_Init(t *testing.T) { //nolint:gocognit,cyclop
 				},
 				CheckName: "custom-check",
 				Templates: map[string]string{},
-				AWS: &config.AWS{ //nolint:gosec
-					SecretID: "validate-pr-review-app",
+				AWS: &config.AWS{
+					SecretID: "ghwhapp",
 				},
 			},
 			expectedUniqueTrustedApps: map[string]struct{}{
@@ -40,8 +40,8 @@ func TestConfig_Init(t *testing.T) { //nolint:gocognit,cyclop
 			name: "empty configuration with defaults",
 			config: &config.Config{
 				Templates: map[string]string{},
-				AWS: &config.AWS{ //nolint:gosec
-					SecretID: "validate-pr-review-app",
+				AWS: &config.AWS{
+					SecretID: "ghwhapp",
 				},
 			},
 			expectedUniqueTrustedApps: map[string]struct{}{
@@ -58,8 +58,8 @@ func TestConfig_Init(t *testing.T) { //nolint:gocognit,cyclop
 					UntrustedMachineUsers: []string{"bot-*", "bot-*"},
 				},
 				Templates: map[string]string{},
-				AWS: &config.AWS{ //nolint:gosec
-					SecretID: "validate-pr-review-app",
+				AWS: &config.AWS{
+					SecretID: "ghwhapp",
 				},
 			},
 			expectedUniqueTrustedApps: map[string]struct{}{
@@ -76,8 +76,8 @@ func TestConfig_Init(t *testing.T) { //nolint:gocognit,cyclop
 					UnsignedCommitApps:   []string{"renovate[bot]"},
 				},
 				Templates: map[string]string{},
-				AWS: &config.AWS{ //nolint:gosec
-					SecretID: "validate-pr-review-app",
+				AWS: &config.AWS{
+					SecretID: "ghwhapp",
 				},
 			},
 			wantErr: true,
@@ -96,8 +96,8 @@ func TestConfig_Init(t *testing.T) { //nolint:gocognit,cyclop
 					},
 				},
 				Templates: map[string]string{},
-				AWS: &config.AWS{ //nolint:gosec
-					SecretID: "validate-pr-review-app",
+				AWS: &config.AWS{
+					SecretID: "ghwhapp",
 				},
 			},
 			wantErr: true,
@@ -180,8 +180,8 @@ func TestConfig_Init_NilTemplates(t *testing.T) {
 			TrustedApps: []string{"app1[bot]"},
 		},
 		Templates: nil,
-		AWS: &config.AWS{ //nolint:gosec
-			SecretID: "validate-pr-review-app",
+		AWS: &config.AWS{
+			SecretID: "ghwhapp",
 		},
 	}
 

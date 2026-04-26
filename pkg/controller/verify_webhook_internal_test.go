@@ -7,7 +7,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/config"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/config"
 )
 
 func newMockValidateSignature(err error) func(_ string, _, _ []byte) error {

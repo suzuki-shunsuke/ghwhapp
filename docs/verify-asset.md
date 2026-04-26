@@ -16,10 +16,10 @@ aqua g -i cli/cli
 
 ```sh
 version=v1.0.0
-asset=validate-pr-review-app_linux_amd64.zip
-gh release download -R suzuki-shunsuke/validate-pr-review-app "$version" -p "$asset"
+asset=ghwhapp_linux_amd64.zip
+gh release download -R suzuki-shunsuke/ghwhapp "$version" -p "$asset"
 gh attestation verify "$asset" \
-  -R suzuki-shunsuke/validate-pr-review-app \
+  -R suzuki-shunsuke/ghwhapp \
   --signer-workflow suzuki-shunsuke/go-release-workflow/.github/workflows/release.yaml
 ```
 
@@ -33,11 +33,11 @@ aqua g -i slsa-framework/slsa-verifier
 
 ```sh
 version=v1.0.0
-asset=validate-pr-review-app_linux_amd64.zip
-gh release download -R suzuki-shunsuke/validate-pr-review-app "$version" -p "$asset" -p multiple.intoto.jsonl
+asset=ghwhapp_linux_amd64.zip
+gh release download -R suzuki-shunsuke/ghwhapp "$version" -p "$asset" -p multiple.intoto.jsonl
 slsa-verifier verify-artifact "$asset" \
   --provenance-path multiple.intoto.jsonl \
-  --source-uri github.com/suzuki-shunsuke/validate-pr-review-app \
+  --source-uri github.com/suzuki-shunsuke/ghwhapp \
   --source-tag "$version"
 ```
 
@@ -51,10 +51,10 @@ aqua g -i sigstore/cosign
 
 ```sh
 version=v1.0.0
-checksum_file="validate-pr-review-app_${version#v}_checksums.txt"
-asset=validate-pr-review-app_linux_amd64.zip
+checksum_file="ghwhapp_${version#v}_checksums.txt"
+asset=ghwhapp_linux_amd64.zip
 gh release download "$version" \
-  -R suzuki-shunsuke/validate-pr-review-app \
+  -R suzuki-shunsuke/ghwhapp \
   -p "$asset" \
   -p "$checksum_file" \
   -p "${checksum_file}.bundle"

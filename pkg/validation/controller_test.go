@@ -3,7 +3,7 @@ package validation_test
 import (
 	"testing"
 
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/validation"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/validation"
 )
 
 func TestNew(t *testing.T) {
