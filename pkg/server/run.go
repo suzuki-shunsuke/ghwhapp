@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/suzuki-shunsuke/ghwhapp/pkg/controller"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/validate-pr-review-app/controller"
 	"github.com/suzuki-shunsuke/slog-error/slogerr"
 )
 

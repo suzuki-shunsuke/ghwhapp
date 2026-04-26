@@ -7,11 +7,11 @@ import (
 
 	"github.com/suzuki-shunsuke/ghwhapp/pkg/aws"
 	"github.com/suzuki-shunsuke/ghwhapp/pkg/config"
-	"github.com/suzuki-shunsuke/ghwhapp/pkg/controller"
 	"github.com/suzuki-shunsuke/ghwhapp/pkg/gcloud"
 	"github.com/suzuki-shunsuke/ghwhapp/pkg/logging"
 	"github.com/suzuki-shunsuke/ghwhapp/pkg/secret"
 	"github.com/suzuki-shunsuke/ghwhapp/pkg/server"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/validate-pr-review-app/controller"
 )
 
 func Run(ctx context.Context, logger *slog.Logger, logLevel *slog.LevelVar, getEnv func(string) string, version string) error {

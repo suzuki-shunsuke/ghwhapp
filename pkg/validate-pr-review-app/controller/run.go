@@ -6,7 +6,7 @@ import (
 	"log/slog"
 
 	"github.com/suzuki-shunsuke/ghwhapp/pkg/config"
-	"github.com/suzuki-shunsuke/ghwhapp/pkg/validation"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/validate-pr-review-app/validation"
 	"github.com/suzuki-shunsuke/slog-error/slogerr"
 )
 

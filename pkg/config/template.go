@@ -7,7 +7,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com/suzuki-shunsuke/ghwhapp/pkg/validation"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/validate-pr-review-app/validation"
 )
 
 var (

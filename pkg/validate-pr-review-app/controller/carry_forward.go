@@ -7,7 +7,7 @@ import (
 
 	"github.com/suzuki-shunsuke/ghwhapp/pkg/config"
 	"github.com/suzuki-shunsuke/ghwhapp/pkg/github"
-	"github.com/suzuki-shunsuke/ghwhapp/pkg/validation"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/validate-pr-review-app/validation"
 )
 
 // carryForwardCheck handles pull_request.synchronize events.
