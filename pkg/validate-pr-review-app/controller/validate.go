@@ -6,10 +6,11 @@ import (
 	"log/slog"
 
 	"github.com/suzuki-shunsuke/ghwhapp/pkg/config"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/github"
 	"github.com/suzuki-shunsuke/ghwhapp/pkg/validate-pr-review-app/validation"
 )
 
-func (c *Controller) validate(ctx context.Context, logger *slog.Logger, ev *Event, trust *config.Trust, insecure *config.Insecure) *validation.Result {
+func (c *Controller) validate(ctx context.Context, logger *slog.Logger, ev *github.Event, trust *config.Trust, insecure *config.Insecure) *validation.Result {
 	pr, err := c.gh.GetPR(ctx, ev.RepoOwner, ev.RepoName, ev.PRNumber)
 	if err != nil {
 		return &validation.Result{Error: fmt.Errorf("get a pull request: %w", err).Error()}

@@ -13,7 +13,7 @@ import (
 // carryForwardCheck handles pull_request.synchronize events.
 // When new commits are pushed that are all empty or clean merge commits,
 // carry forward the validation result from the most recent reviewed commit.
-func (c *Controller) carryForwardCheck(ctx context.Context, logger *slog.Logger, ev *Event, trust *config.Trust, insecure *config.Insecure) *validation.Result {
+func (c *Controller) carryForwardCheck(ctx context.Context, logger *slog.Logger, ev *github.Event, trust *config.Trust, insecure *config.Insecure) *validation.Result {
 	pr, err := c.gh.GetPR(ctx, ev.RepoOwner, ev.RepoName, ev.PRNumber)
 	if err != nil {
 		return &validation.Result{Error: fmt.Errorf("get a pull request: %w", err).Error()}
@@ -59,7 +59,7 @@ func (c *Controller) carryForwardCheck(ctx context.Context, logger *slog.Logger,
 // For each commit, it checks whether the commit is "harmless" (empty or clean merge).
 // When a commit with reviews is found, its approvers are returned.
 // Returns nil if carry-forward is not applicable.
-func (c *Controller) findCarryForwardApprovers(ctx context.Context, logger *slog.Logger, ev *Event, pr *github.PullRequest) map[string]*github.User {
+func (c *Controller) findCarryForwardApprovers(ctx context.Context, logger *slog.Logger, ev *github.Event, pr *github.PullRequest) map[string]*github.User {
 	prCommitSHAs := buildPRCommitSHAs(pr)
 	// Walk commits from newest to oldest.
 	for i := len(pr.Commits) - 1; i >= 0; i-- {

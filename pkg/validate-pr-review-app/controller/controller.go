@@ -12,10 +12,10 @@ import (
 )
 
 type Controller struct {
-	input             *InputNew
-	gh                GitHub
-	validator         Validator
-	validateSignature func(signature string, payload, secretToken []byte) error
+	input           *InputNew
+	gh              GitHub
+	validator       Validator
+	webhookVerifier WebhookVerifier
 }
 
 func New(input *InputNew) (*Controller, error) {
@@ -30,11 +30,18 @@ func New(input *InputNew) (*Controller, error) {
 		return nil, fmt.Errorf("create GitHub client: %w", err)
 	}
 	return &Controller{
-		input:             input,
-		gh:                gh,
-		validator:         validation.New(&validation.InputNew{}),
-		validateSignature: github.ValidateSignature,
+		input:     input,
+		gh:        gh,
+		validator: validation.New(&validation.InputNew{}),
+		webhookVerifier: github.NewWebhookVerifier(&github.ParamNewWebhookVerifier{
+			ValidateSignature: github.ValidateSignature,
+			WebhookSecret:     input.WebhookSecret,
+		}),
 	}, nil
+}
+
+type WebhookVerifier interface {
+	Verify(logger *slog.Logger, req *github.Request) *github.Event
 }
 
 type InputNew struct {
@@ -54,11 +61,4 @@ type GitHub interface {
 	CreateCheckRun(ctx context.Context, input githubv4.CreateCheckRunInput) error
 	CompareCommits(ctx context.Context, owner, repo, base, head string) ([]string, error)
 	IsAncestor(ctx context.Context, owner, repo, ancestor, descendant string) (bool, error)
-}
-
-type Request struct {
-	// Generate template > Method request passthrough
-	Body      string            `json:"body"`
-	Headers   map[string]string `json:"header"`
-	RequestID string            `json:"requestid"`
 }

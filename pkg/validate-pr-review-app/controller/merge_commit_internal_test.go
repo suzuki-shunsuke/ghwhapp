@@ -236,7 +236,7 @@ func Test_isCleanMergeCommit(t *testing.T) { //nolint:funlen
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 			ctrl := &Controller{gh: tt.mock}
-			ev := &Event{RepoOwner: "owner", RepoName: "repo"}
+			ev := &github.Event{RepoOwner: "owner", RepoName: "repo"}
 			got := ctrl.isCleanMergeCommit(context.Background(), discardLogger, ev, tt.commit, tt.prCommitSHAs, tt.baseSHA)
 			if got != tt.want {
 				t.Errorf("isCleanMergeCommit() = %v, want %v", got, tt.want)
@@ -442,7 +442,7 @@ func Test_checkApproverCommits(t *testing.T) { //nolint:funlen
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 			ctrl := &Controller{gh: tt.mock}
-			ev := &Event{RepoOwner: "owner", RepoName: "repo"}
+			ev := &github.Event{RepoOwner: "owner", RepoName: "repo"}
 			ctrl.checkApproverCommits(context.Background(), discardLogger, ev, tt.pr)
 
 			got := make([]bool, len(tt.pr.Commits))

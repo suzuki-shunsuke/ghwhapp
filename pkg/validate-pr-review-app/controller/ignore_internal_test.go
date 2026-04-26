@@ -4,6 +4,8 @@ package controller
 import (
 	"log/slog"
 	"testing"
+
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/github"
 )
 
 func Test_ignore(t *testing.T) {
@@ -11,12 +13,12 @@ func Test_ignore(t *testing.T) {
 
 	tests := []struct {
 		name     string
-		event    *Event
+		event    *github.Event
 		expected bool
 	}{
 		{
 			name: "ignore edited action",
-			event: &Event{
+			event: &github.Event{
 				Action:      "edited",
 				ReviewState: "approved",
 			},
@@ -24,7 +26,7 @@ func Test_ignore(t *testing.T) {
 		},
 		{
 			name: "ignore commented state",
-			event: &Event{
+			event: &github.Event{
 				Action:      "submitted",
 				ReviewState: "commented",
 			},
@@ -32,7 +34,7 @@ func Test_ignore(t *testing.T) {
 		},
 		{
 			name: "ignore pending state",
-			event: &Event{
+			event: &github.Event{
 				Action:      "submitted",
 				ReviewState: "pending",
 			},
@@ -40,7 +42,7 @@ func Test_ignore(t *testing.T) {
 		},
 		{
 			name: "do not ignore approved state",
-			event: &Event{
+			event: &github.Event{
 				Action:      "submitted",
 				ReviewState: "approved",
 			},
@@ -48,7 +50,7 @@ func Test_ignore(t *testing.T) {
 		},
 		{
 			name: "do not ignore changes_requested state",
-			event: &Event{
+			event: &github.Event{
 				Action:      "submitted",
 				ReviewState: "changes_requested",
 			},
@@ -56,7 +58,7 @@ func Test_ignore(t *testing.T) {
 		},
 		{
 			name: "do not ignore dismissed state",
-			event: &Event{
+			event: &github.Event{
 				Action:      "dismissed",
 				ReviewState: "dismissed",
 			},
@@ -64,7 +66,7 @@ func Test_ignore(t *testing.T) {
 		},
 		{
 			name: "handle empty action",
-			event: &Event{
+			event: &github.Event{
 				Action:      "",
 				ReviewState: "approved",
 			},
@@ -72,7 +74,7 @@ func Test_ignore(t *testing.T) {
 		},
 		{
 			name: "handle empty review state",
-			event: &Event{
+			event: &github.Event{
 				Action:      "submitted",
 				ReviewState: "",
 			},
@@ -80,7 +82,7 @@ func Test_ignore(t *testing.T) {
 		},
 		{
 			name: "handle empty fields",
-			event: &Event{
+			event: &github.Event{
 				Action:      "",
 				ReviewState: "",
 			},
