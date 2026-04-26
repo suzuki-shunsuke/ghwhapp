@@ -9,9 +9,9 @@ import (
 	"strings"
 
 	"github.com/shurcooL/githubv4"
-	"github.com/suzuki-shunsuke/slog-error/slogerr"
 	"github.com/suzuki-shunsuke/ghwhapp/pkg/config"
 	"github.com/suzuki-shunsuke/ghwhapp/pkg/validation"
+	"github.com/suzuki-shunsuke/slog-error/slogerr"
 )
 
 func (c *Controller) newCheckRunInput(logger *slog.Logger, ev *Event, result *validation.Result, trust *config.Trust, insecure *config.Insecure) githubv4.CreateCheckRunInput {

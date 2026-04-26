@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/suzuki-shunsuke/slog-error/slogerr"
 	"github.com/suzuki-shunsuke/ghwhapp/pkg/controller"
+	"github.com/suzuki-shunsuke/slog-error/slogerr"
 )
 
 const (

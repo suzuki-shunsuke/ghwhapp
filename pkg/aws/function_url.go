@@ -7,8 +7,8 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-lambda-go/events"
-	"github.com/suzuki-shunsuke/slog-error/slogerr"
 	"github.com/suzuki-shunsuke/ghwhapp/pkg/controller"
+	"github.com/suzuki-shunsuke/slog-error/slogerr"
 )
 
 type FunctionURLRequest struct {
