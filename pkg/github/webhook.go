@@ -53,22 +53,6 @@ func NewWebhookVerifier(param *ParamNewWebhookVerifier) *WebhookVerifier {
 	}
 }
 
-func (c *WebhookVerifier) verifySignature(body []byte, headers map[string]string) error {
-	sig, ok := headers[headerXHubSignature]
-	if !ok {
-		return errHeaderXHubSignatureIsRequired
-	}
-	return c.validateSignature(sig, body, c.webhookSecret)
-}
-
-func (c *WebhookVerifier) normalizeHeaders(headers map[string]string) map[string]string {
-	hs := make(map[string]string, len(headers))
-	for k, v := range headers {
-		hs[strings.ToUpper(k)] = v
-	}
-	return hs
-}
-
 func (c *WebhookVerifier) Verify(logger *slog.Logger, req *Request) *Event { //nolint:cyclop
 	headers := c.normalizeHeaders(req.Headers)
 	body := []byte(req.Body)
@@ -115,6 +99,22 @@ func (c *WebhookVerifier) Verify(logger *slog.Logger, req *Request) *Event { //n
 		logger.Warn("ignore the event", "event_type", evType)
 		return nil
 	}
+}
+
+func (c *WebhookVerifier) verifySignature(body []byte, headers map[string]string) error {
+	sig, ok := headers[headerXHubSignature]
+	if !ok {
+		return errHeaderXHubSignatureIsRequired
+	}
+	return c.validateSignature(sig, body, c.webhookSecret)
+}
+
+func (c *WebhookVerifier) normalizeHeaders(headers map[string]string) map[string]string {
+	hs := make(map[string]string, len(headers))
+	for k, v := range headers {
+		hs[strings.ToUpper(k)] = v
+	}
+	return hs
 }
 
 type Event struct {
