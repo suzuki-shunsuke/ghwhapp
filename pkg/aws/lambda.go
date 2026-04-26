@@ -6,8 +6,8 @@ import (
 
 	"github.com/aws/aws-lambda-go/lambda"
 	"github.com/aws/aws-lambda-go/lambdacontext"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/config"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/controller"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/config"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/controller"
 )
 
 // Read config and secret

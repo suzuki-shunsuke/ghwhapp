@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/config"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/config"
 )
 
 func Test_mergeTrust(t *testing.T) { //nolint:funlen

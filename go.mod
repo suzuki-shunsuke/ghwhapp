@@ -1,4 +1,4 @@
-module github.com/suzuki-shunsuke/validate-pr-review-app
+module github.com/suzuki-shunsuke/ghwhapp
 
 go 1.26.2
 

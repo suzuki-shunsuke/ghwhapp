@@ -1,6 +1,6 @@
-# AI Assistant Guidelines for validate-pr-review-app
+# AI Assistant Guidelines for ghwhapp
 
-This document contains common guidelines for AI assistants working on the validate-pr-review-app project.
+This document contains common guidelines for AI assistants working on the ghwhapp project.
 Individual AI-specific documents (like CLAUDE.md, CLINE.md) should reference this guide.
 
 ## Language

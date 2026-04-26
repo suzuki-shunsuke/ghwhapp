@@ -1,6 +1,6 @@
 # Validate PR Review App
 
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/suzuki-shunsuke/validate-pr-review-app) [Agent Skills](#agent-skills)
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/suzuki-shunsuke/ghwhapp) [Agent Skills](#agent-skills)
 
 Validate PR Review App is a self-hosted GitHub App that validates Pull Request reviews.
 It helps organizations improve governance and security by ensuring PRs cannot be merged without proper approvals while keeping developer experience.
@@ -106,14 +106,14 @@ While GitHub Actions-based validation works for small projects, it doesn’t sca
 
 [About Agent Skills, please see the official document.](https://agentskills.io/home)
 
-We provide Agent Skills for validate-pr-review-app:
+We provide Agent Skills for ghwhapp:
 
-[suzuki-shunsuke/agent-skills: validate-pr-review-app](https://github.com/suzuki-shunsuke/agent-skills/blob/main/skills/validate-pr-review-app/SKILL.md)
+[suzuki-shunsuke/agent-skills: ghwhapp](https://github.com/suzuki-shunsuke/agent-skills/blob/main/skills/ghwhapp/SKILL.md)
 
 Install the skill using [vercel-labs/skills](https://github.com/vercel-labs/skills):
 
 ```sh
-npx skills add suzuki-shunsuke/agent-skills --skill validate-pr-review-app
+npx skills add suzuki-shunsuke/agent-skills --skill ghwhapp
 ```
 
 ## Merge Queue Support

@@ -6,9 +6,9 @@ import (
 	"log/slog"
 
 	"github.com/shurcooL/githubv4"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/config"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/github"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/validation"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/config"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/github"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/validation"
 )
 
 type Controller struct {

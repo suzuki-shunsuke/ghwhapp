@@ -49,7 +49,7 @@ func (r *Repository) Validate() error {
 		return errors.New("trust is required")
 	}
 	for _, pattern := range r.Repositories {
-		if _, err := path.Match(pattern, "suzuki-shunsuke/validate-pr-review-app"); err != nil {
+		if _, err := path.Match(pattern, "suzuki-shunsuke/ghwhapp"); err != nil {
 			return fmt.Errorf("invalid repository pattern %q: %w", pattern, err)
 		}
 	}

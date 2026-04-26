@@ -6,8 +6,8 @@ import (
 
 	"github.com/google/go-github/v85/github"
 	"github.com/shurcooL/githubv4"
-	v3 "github.com/suzuki-shunsuke/validate-pr-review-app/pkg/github/v3"
-	v4 "github.com/suzuki-shunsuke/validate-pr-review-app/pkg/github/v4"
+	v3 "github.com/suzuki-shunsuke/ghwhapp/pkg/github/v3"
+	v4 "github.com/suzuki-shunsuke/ghwhapp/pkg/github/v4"
 )
 
 type Client struct {

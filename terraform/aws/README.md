@@ -45,13 +45,13 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 | ---- | ----------- | ---- | ------- | :------: |
-| <a name="input_api_gateway_name"></a> [api\_gateway\_name](#input\_api\_gateway\_name) | n/a | `string` | `"validate-pr-review-app"` | no |
-| <a name="input_function_name"></a> [function\_name](#input\_function\_name) | Lambda Function Name | `string` | `"validate-pr-review-app"` | no |
+| <a name="input_api_gateway_name"></a> [api\_gateway\_name](#input\_api\_gateway\_name) | n/a | `string` | `"ghwhapp"` | no |
+| <a name="input_function_name"></a> [function\_name](#input\_function\_name) | Lambda Function Name | `string` | `"ghwhapp"` | no |
 | <a name="input_lambda_architecture"></a> [lambda\_architecture](#input\_lambda\_architecture) | Lambda Architecture | `string` | `"arm64"` | no |
-| <a name="input_lambda_role_name"></a> [lambda\_role\_name](#input\_lambda\_role\_name) | Lambda Role Name | `string` | `"validate-pr-review-app"` | no |
+| <a name="input_lambda_role_name"></a> [lambda\_role\_name](#input\_lambda\_role\_name) | Lambda Role Name | `string` | `"ghwhapp"` | no |
 | <a name="input_lambda_role_path"></a> [lambda\_role\_path](#input\_lambda\_role\_path) | Lambda Role Path | `string` | `"/service-role/"` | no |
-| <a name="input_secretsmanager_secret_name_main"></a> [secretsmanager\_secret\_name\_main](#input\_secretsmanager\_secret\_name\_main) | n/a | `string` | `"validate-pr-review-app"` | no |
-| <a name="input_zip_path"></a> [zip\_path](#input\_zip\_path) | Lambda Zip File Path | `string` | `"validate-pr-review-app_linux_arm64.zip"` | no |
+| <a name="input_secretsmanager_secret_name_main"></a> [secretsmanager\_secret\_name\_main](#input\_secretsmanager\_secret\_name\_main) | n/a | `string` | `"ghwhapp"` | no |
+| <a name="input_zip_path"></a> [zip\_path](#input\_zip\_path) | Lambda Zip File Path | `string` | `"ghwhapp_linux_arm64.zip"` | no |
 
 ## Outputs
 

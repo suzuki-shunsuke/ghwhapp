@@ -9,7 +9,7 @@ import (
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/suzuki-shunsuke/slog-error/slogerr"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/controller"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/controller"
 )
 
 type ProxyRequest struct {

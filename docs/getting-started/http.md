@@ -11,11 +11,11 @@ Requirements:
 1. Checkout the repository
 
 ```sh
-git clone https://github.com/suzuki-shunsuke/validate-pr-review-app
+git clone https://github.com/suzuki-shunsuke/ghwhapp
 ```
 
 ```sh
-cd validate-pr-review-app/example
+cd ghwhapp/example
 ```
 
 2. [Create a GitHub App](../github-app.md)
@@ -42,7 +42,7 @@ docker run --rm -d -p 8080:8080 \
   -v "$PWD:/workspace" \
   -e "CONFIG_FILE=/workspace/config.yaml" \
   -e "SECRET_FILE=/workspace/secret.yaml" \
-  "ghcr.io/suzuki-shunsuke/validate-pr-review-app:$VERSION"
+  "ghcr.io/suzuki-shunsuke/ghwhapp:$VERSION"
 ```
 
 Go:

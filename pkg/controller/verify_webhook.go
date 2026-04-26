@@ -10,7 +10,7 @@ import (
 	"strings"
 
 	"github.com/suzuki-shunsuke/slog-error/slogerr"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/github"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/github"
 )
 
 var (

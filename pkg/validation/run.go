@@ -8,7 +8,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/github"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/github"
 )
 
 // Run validates pull request reviews.

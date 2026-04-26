@@ -1,11 +1,11 @@
 variable "api_gateway_name" {
   type    = string
-  default = "validate-pr-review-app"
+  default = "ghwhapp"
 }
 
 variable "secretsmanager_secret_name_main" {
   type    = string
-  default = "validate-pr-review-app"
+  default = "ghwhapp"
 }
 
 variable "lambda_architecture" {
@@ -17,19 +17,19 @@ variable "lambda_architecture" {
 variable "zip_path" {
   type        = string
   description = "Lambda Zip File Path"
-  default     = "validate-pr-review-app_linux_arm64.zip"
+  default     = "ghwhapp_linux_arm64.zip"
 }
 
 variable "function_name" {
   type        = string
   description = "Lambda Function Name"
-  default     = "validate-pr-review-app"
+  default     = "ghwhapp"
 }
 
 variable "lambda_role_name" {
   type        = string
   description = "Lambda Role Name"
-  default     = "validate-pr-review-app"
+  default     = "ghwhapp"
 }
 
 variable "lambda_role_path" {

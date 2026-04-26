@@ -8,13 +8,13 @@ body:
   - type: textarea
     id: version
     attributes:
-      label: validate-pr-review-app version
+      label: ghwhapp version
       description: |
         Please use the latest version.
         If you checked multiple versions, please write the result too.
         e.g. This issue occurs with v0.2.0 too, but doesn't occur with v0.1.0.
       value: |
-        - [ ] I confirmed this issue occurs with [the latest version](https://github.com/suzuki-shunsuke/validate-pr-review-app/releases).
+        - [ ] I confirmed this issue occurs with [the latest version](https://github.com/suzuki-shunsuke/ghwhapp/releases).
         - versions that the issue occurs:
         - (Optional) versions that the issue doesn't occur:
     validations:

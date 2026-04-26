@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/suzuki-shunsuke/validate-pr-review-app/pkg/config/config",
+  "$id": "https://github.com/suzuki-shunsuke/ghwhapp/pkg/config/config",
   "$ref": "#/$defs/Config",
   "$defs": {
     "AWS": {

@@ -5,13 +5,13 @@ import (
 	"fmt"
 	"log/slog"
 
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/aws"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/config"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/controller"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/gcloud"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/logging"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/secret"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/server"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/aws"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/config"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/controller"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/gcloud"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/logging"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/secret"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/server"
 )
 
 func Run(ctx context.Context, logger *slog.Logger, logLevel *slog.LevelVar, getEnv func(string) string, version string) error {

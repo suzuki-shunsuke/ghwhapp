@@ -56,13 +56,13 @@ ajv --spec=draft2020 -s json-schema/config.json -d config.yaml
 Version: `main`
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/suzuki-shunsuke/validate-pr-review-app/main/json-schema/config.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/suzuki-shunsuke/ghwhapp/main/json-schema/config.json
 ```
 
 Or pinning version:
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/suzuki-shunsuke/validate-pr-review-app/v0.0.1/json-schema/config.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/suzuki-shunsuke/ghwhapp/v0.0.1/json-schema/config.json
 ```
 
 ## Example Config
@@ -73,7 +73,7 @@ Or pinning version:
 > :x: `dependabot[bot]`
 
 ```yaml
-# yaml-language-server: $schema=https://raw.githubusercontent.com/suzuki-shunsuke/validate-pr-review-app/main/json-schema/config.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/suzuki-shunsuke/ghwhapp/main/json-schema/config.json
 # Required
 app_id: 0000 # GitHub App ID
 installation_id: 00000000 # GitHub App Installation ID

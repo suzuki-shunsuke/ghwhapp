@@ -15,13 +15,13 @@ Requirements:
 1. Checkout the repository
 
 ```sh
-git clone https://github.com/suzuki-shunsuke/validate-pr-review-app
+git clone https://github.com/suzuki-shunsuke/ghwhapp
 ```
 
 2. Move to [terraform/aws](../../terraform/aws).
 
 ```sh
-cd validate-pr-review-app/terraform/aws
+cd ghwhapp/terraform/aws
 ```
 
 3. Run `bash init.sh`
@@ -142,6 +142,6 @@ Remove `use_lambda_function_url` from [config.yaml](../../terraform/aws/config.y
 
 ```yaml
 aws:
-  secret_id: validate-pr-review-app
+  secret_id: ghwhapp
   # use_lambda_function_url: true
 ```

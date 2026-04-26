@@ -4,7 +4,7 @@ import (
 	"context"
 	"log/slog"
 
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/github"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/github"
 )
 
 // checkApproverCommits checks if commits by approvers are harmless

@@ -3,7 +3,7 @@ package config_test
 import (
 	"testing"
 
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/config"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/config"
 )
 
 func TestTrust_Validate(t *testing.T) {

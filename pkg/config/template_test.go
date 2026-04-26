@@ -6,9 +6,9 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/config"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/github"
-	"github.com/suzuki-shunsuke/validate-pr-review-app/pkg/validation"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/config"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/github"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/validation"
 )
 
 func TestTemplates(t *testing.T) {
@@ -44,7 +44,7 @@ Untrusted Machine Users: Nothing
 
 ---
 
-[This check is created by Validate PR Review App](https://github.com/suzuki-shunsuke/validate-pr-review-app).
+[This check is created by Validate PR Review App](https://github.com/suzuki-shunsuke/ghwhapp).
 
 - Version: v0.0.1
 - Request ID: unknown
@@ -80,7 +80,7 @@ Untrusted Machine Users:
 
 ---
 
-[This check is created by Validate PR Review App](https://github.com/suzuki-shunsuke/validate-pr-review-app).
+[This check is created by Validate PR Review App](https://github.com/suzuki-shunsuke/ghwhapp).
 
 - Version: unknown
 - Request ID: req-12345
@@ -110,7 +110,7 @@ Untrusted Machine Users:
 
 ---
 
-[This check is created by Validate PR Review App](https://github.com/suzuki-shunsuke/validate-pr-review-app).
+[This check is created by Validate PR Review App](https://github.com/suzuki-shunsuke/ghwhapp).
 
 - Version: unknown
 - Request ID: unknown
@@ -133,7 +133,7 @@ Untrusted Machine Users: Nothing
 
 ---
 
-[This check is created by Validate PR Review App](https://github.com/suzuki-shunsuke/validate-pr-review-app).
+[This check is created by Validate PR Review App](https://github.com/suzuki-shunsuke/ghwhapp).
 
 - Version: unknown
 - Request ID: unknown
@@ -186,7 +186,7 @@ Untrusted Machine Users:
 
 ---
 
-[This check is created by Validate PR Review App](https://github.com/suzuki-shunsuke/validate-pr-review-app).
+[This check is created by Validate PR Review App](https://github.com/suzuki-shunsuke/ghwhapp).
 
 - Version: unknown
 - Request ID: unknown
@@ -226,7 +226,7 @@ Untrusted Machine Users: Nothing
 
 ---
 
-[This check is created by Validate PR Review App](https://github.com/suzuki-shunsuke/validate-pr-review-app).
+[This check is created by Validate PR Review App](https://github.com/suzuki-shunsuke/ghwhapp).
 
 - Version: v0.1.0
 - Request ID: req-insecure
@@ -260,7 +260,7 @@ Untrusted Machine Users: Nothing
 
 ---
 
-[This check is created by Validate PR Review App](https://github.com/suzuki-shunsuke/validate-pr-review-app).
+[This check is created by Validate PR Review App](https://github.com/suzuki-shunsuke/ghwhapp).
 
 - Version: v0.1.0
 - Request ID: req-partial
@@ -269,7 +269,7 @@ Untrusted Machine Users: Nothing
 	}
 	cfg := &config.Config{
 		AWS: &config.AWS{ //nolint:gosec
-			SecretID: "validate-pr-review-app",
+			SecretID: "ghwhapp",
 		},
 	}
 	if err := cfg.Init(); err != nil {
