@@ -5,7 +5,7 @@ import (
 	"log/slog"
 
 	"github.com/suzuki-shunsuke/ghwhapp/pkg/config"
-	"github.com/suzuki-shunsuke/ghwhapp/pkg/controller"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/github"
 )
 
 type Server struct {
@@ -15,7 +15,7 @@ type Server struct {
 }
 
 type Controller interface {
-	Run(ctx context.Context, logger *slog.Logger, req *controller.Request) error
+	Run(ctx context.Context, logger *slog.Logger, req *github.Request) error
 }
 
 func New(logger *slog.Logger, ctrl Controller, cfg *config.Config) (*Server, error) {

@@ -10,11 +10,12 @@ import (
 
 	"github.com/shurcooL/githubv4"
 	"github.com/suzuki-shunsuke/ghwhapp/pkg/config"
-	"github.com/suzuki-shunsuke/ghwhapp/pkg/validation"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/github"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/validate-pr-review-app/validation"
 	"github.com/suzuki-shunsuke/slog-error/slogerr"
 )
 
-func (c *Controller) newCheckRunInput(logger *slog.Logger, ev *Event, result *validation.Result, trust *config.Trust, insecure *config.Insecure) githubv4.CreateCheckRunInput {
+func (c *Controller) newCheckRunInput(logger *slog.Logger, ev *github.Event, result *validation.Result, trust *config.Trust, insecure *config.Insecure) githubv4.CreateCheckRunInput {
 	result.Version = c.input.Version
 	var conclusion githubv4.CheckConclusionState
 	var title githubv4.String

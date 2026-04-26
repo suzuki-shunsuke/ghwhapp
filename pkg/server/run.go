@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	"github.com/suzuki-shunsuke/ghwhapp/pkg/controller"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/github"
 	"github.com/suzuki-shunsuke/slog-error/slogerr"
 )
 
@@ -81,7 +81,7 @@ func (h *Server) Run(w http.ResponseWriter, r *http.Request) {
 	//
 	// Both cases differ from a CLI tool where Ctrl-C is an intentional user action to stop processing.
 	// In the webhook server case, neither the sender (GitHub) nor the infrastructure (k8s) intends to cancel the application's business logic.
-	if err := h.controller.Run(context.Background(), logger, &controller.Request{ //nolint:contextcheck
+	if err := h.controller.Run(context.Background(), logger, &github.Request{ //nolint:contextcheck
 		Body:      string(body),
 		Headers:   convertHeaders(r.Header),
 		RequestID: requestID,

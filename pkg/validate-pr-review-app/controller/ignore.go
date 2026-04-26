@@ -2,11 +2,13 @@ package controller
 
 import (
 	"log/slog"
+
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/github"
 )
 
-func ignore(logger *slog.Logger, ev *Event) bool {
+func ignore(logger *slog.Logger, ev *github.Event) bool {
 	// For pull_request events, only process "synchronize" action.
-	if ev.EventType == eventPullRequest {
+	if ev.EventType == github.EventTypePullRequest {
 		if ev.Action != "synchronize" {
 			logger.Debug("ignore the pull_request event because the action is not 'synchronize'", "action", ev.Action)
 			return true

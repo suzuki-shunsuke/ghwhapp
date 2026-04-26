@@ -7,7 +7,7 @@ import (
 	"fmt"
 
 	"github.com/aws/aws-lambda-go/events"
-	"github.com/suzuki-shunsuke/ghwhapp/pkg/controller"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/github"
 	"github.com/suzuki-shunsuke/slog-error/slogerr"
 )
 
@@ -62,7 +62,7 @@ func (h *Handler) handleFunctionURL(ctx context.Context, req *FunctionURLRequest
 		return
 	}
 
-	if err := h.controller.Run(ctx, logger, &controller.Request{
+	if err := h.controller.Run(ctx, logger, &github.Request{
 		Body:      req.request.Body,
 		Headers:   req.request.Headers,
 		RequestID: requestID,

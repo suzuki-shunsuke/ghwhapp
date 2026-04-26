@@ -6,14 +6,15 @@ import (
 	"log/slog"
 
 	"github.com/suzuki-shunsuke/ghwhapp/pkg/config"
-	"github.com/suzuki-shunsuke/ghwhapp/pkg/validation"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/github"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/validate-pr-review-app/validation"
 	"github.com/suzuki-shunsuke/slog-error/slogerr"
 )
 
-func (c *Controller) Run(ctx context.Context, logger *slog.Logger, req *Request) error {
+func (c *Controller) Run(ctx context.Context, logger *slog.Logger, req *github.Request) error {
 	logger.Debug("Starting a request", "request", req)
 	// Validate the request
-	ev := c.verifyWebhook(logger, req)
+	ev := c.webhookVerifier.Verify(logger, req)
 	if ev == nil {
 		return nil
 	}
@@ -44,7 +45,7 @@ func (c *Controller) Run(ctx context.Context, logger *slog.Logger, req *Request)
 
 	// Run validation
 	var result *validation.Result
-	if ev.EventType == eventPullRequest {
+	if ev.EventType == github.EventTypePullRequest {
 		result = c.carryForwardCheck(ctx, logger, ev, &trust, &insecure)
 		if result == nil {
 			logger.Info("carry-forward check not applicable, skipping")

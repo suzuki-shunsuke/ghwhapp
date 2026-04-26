@@ -11,7 +11,7 @@ import (
 // (empty commits or clean merge commits) and marks them as IsAllowedMergeCommit
 // so the validator can skip the self-approval check for those commits.
 // Only commits where the committer is an approver are checked.
-func (c *Controller) checkApproverCommits(ctx context.Context, logger *slog.Logger, ev *Event, pr *github.PullRequest) {
+func (c *Controller) checkApproverCommits(ctx context.Context, logger *slog.Logger, ev *github.Event, pr *github.PullRequest) {
 	prCommitSHAs := buildPRCommitSHAs(pr)
 	for _, commit := range pr.Commits {
 		if commit.Committer == nil {
@@ -49,7 +49,7 @@ const maxCompareFiles = 300
 // isCleanMergeCommit checks whether a commit is a merge commit whose parents'
 // diffs to the merge commit have no overlapping files (i.e., no conflict resolution)
 // and whose non-PR parents are ancestors of the base branch.
-func (c *Controller) isCleanMergeCommit(ctx context.Context, logger *slog.Logger, ev *Event, commit *github.Commit, prCommitSHAs map[string]struct{}, prBaseSHA string) bool { //nolint:cyclop
+func (c *Controller) isCleanMergeCommit(ctx context.Context, logger *slog.Logger, ev *github.Event, commit *github.Commit, prCommitSHAs map[string]struct{}, prBaseSHA string) bool { //nolint:cyclop
 	if len(commit.Parents) != 2 { //nolint:mnd
 		return false
 	}

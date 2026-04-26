@@ -8,7 +8,7 @@ import (
 	"net/http"
 
 	"github.com/aws/aws-lambda-go/events"
-	"github.com/suzuki-shunsuke/ghwhapp/pkg/controller"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/github"
 	"github.com/suzuki-shunsuke/slog-error/slogerr"
 )
 
@@ -65,7 +65,7 @@ func (h *Handler) handleProxy(ctx context.Context, req *ProxyRequest) (*events.A
 			Body:       "OK",
 		}, nil
 	}
-	if err := h.controller.Run(ctx, logger, &controller.Request{
+	if err := h.controller.Run(ctx, logger, &github.Request{
 		Body:      req.request.Body,
 		Headers:   req.request.Headers,
 		RequestID: requestID,

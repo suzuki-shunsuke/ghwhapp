@@ -85,7 +85,7 @@ HTTP request handling and webhook processing:
 - Branch name parsing for merge queue integration
 - Event routing and processing logic
 
-### pkg/validation
+### pkg/validate-pr-review-app/validation
 Core business logic for PR review validation:
 - Analyzing PR reviews and approvals
 - Checking trusted/untrusted users and apps
@@ -110,7 +110,7 @@ GitHub API integration layer:
 ### Running Tests
 
 - Run all tests: `cmdx t` or `go test -race -covermode=atomic ./...`
-- Run specific package tests: `go test -race -covermode=atomic ./pkg/validation`
+- Run specific package tests: `go test -race -covermode=atomic ./pkg/validate-pr-review-app/validation`
 - Generate coverage: `./scripts/coverage.sh`
 
 ## Dependencies

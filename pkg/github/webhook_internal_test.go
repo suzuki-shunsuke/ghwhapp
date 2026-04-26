@@ -1,13 +1,11 @@
 //nolint:funlen
-package controller
+package github
 
 import (
 	"errors"
 	"log/slog"
 	"os"
 	"testing"
-
-	"github.com/suzuki-shunsuke/ghwhapp/pkg/config"
 )
 
 func newMockValidateSignature(err error) func(_ string, _, _ []byte) error {
@@ -16,7 +14,7 @@ func newMockValidateSignature(err error) func(_ string, _, _ []byte) error {
 	}
 }
 
-func TestHandler_validateRequest(t *testing.T) {
+func TestWebhookVerifier_Verify(t *testing.T) {
 	t.Parallel()
 	const dummySignature = "sha256=abcdefghijklmnopqrstuvwxyz0123456789abcdef"
 
@@ -45,17 +43,14 @@ func TestHandler_validateRequest(t *testing.T) {
 
 	tests := []struct {
 		name          string
-		controller    *Controller
+		verifier      *WebhookVerifier
 		request       *Request
 		wantPayload   bool
 		expectedEvent *Event
 	}{
 		{
 			name: "missing X-HUB-SIGNATURE header",
-			controller: &Controller{
-				input: &InputNew{
-					Config: &config.Config{AppID: 12345},
-				},
+			verifier: &WebhookVerifier{
 				validateSignature: newMockValidateSignature(nil),
 			},
 			request: &Request{
@@ -63,16 +58,13 @@ func TestHandler_validateRequest(t *testing.T) {
 				Headers: map[string]string{
 					headerXGitHubHookInstallationTargetID: "12345",
 					headerXHubSignature:                   dummySignature,
-					headerXGitHubEvent:                    eventPullRequestReview,
+					headerXGitHubEvent:                    EventTypePullRequestReview,
 				},
 			},
 		},
 		{
 			name: "invalid X-HUB-SIGNATURE header",
-			controller: &Controller{
-				input: &InputNew{
-					Config: &config.Config{AppID: 12345},
-				},
+			verifier: &WebhookVerifier{
 				validateSignature: newMockValidateSignature(errors.New("invalid signature")),
 			},
 			request: &Request{
@@ -80,17 +72,14 @@ func TestHandler_validateRequest(t *testing.T) {
 				Headers: map[string]string{
 					headerXGitHubHookInstallationTargetID: "12345",
 					headerXHubSignature:                   dummySignature,
-					headerXGitHubEvent:                    eventPullRequestReview,
+					headerXGitHubEvent:                    EventTypePullRequestReview,
 				},
 			},
 		},
 		{
 			name: "missing X-GITHUB-EVENT header",
-			controller: &Controller{
-				input: &InputNew{
-					Config:        &config.Config{AppID: 12345},
-					WebhookSecret: validSecret,
-				},
+			verifier: &WebhookVerifier{
+				webhookSecret:     validSecret,
 				validateSignature: newMockValidateSignature(nil),
 			},
 			request: &Request{
@@ -103,11 +92,8 @@ func TestHandler_validateRequest(t *testing.T) {
 		},
 		{
 			name: "unsupported event type",
-			controller: &Controller{
-				input: &InputNew{
-					Config:        &config.Config{AppID: 12345},
-					WebhookSecret: validSecret,
-				},
+			verifier: &WebhookVerifier{
+				webhookSecret:     validSecret,
 				validateSignature: newMockValidateSignature(nil),
 			},
 			request: &Request{
@@ -121,11 +107,8 @@ func TestHandler_validateRequest(t *testing.T) {
 		},
 		{
 			name: "invalid JSON payload",
-			controller: &Controller{
-				input: &InputNew{
-					Config:        &config.Config{AppID: 12345},
-					WebhookSecret: []byte("test-secret"),
-				},
+			verifier: &WebhookVerifier{
+				webhookSecret:     []byte("test-secret"),
 				validateSignature: newMockValidateSignature(nil),
 			},
 			request: &Request{
@@ -133,17 +116,14 @@ func TestHandler_validateRequest(t *testing.T) {
 				Headers: map[string]string{
 					headerXGitHubHookInstallationTargetID: "12345",
 					headerXHubSignature:                   dummySignature,
-					headerXGitHubEvent:                    eventPullRequestReview,
+					headerXGitHubEvent:                    EventTypePullRequestReview,
 				},
 			},
 		},
 		{
 			name: "valid request",
-			controller: &Controller{
-				input: &InputNew{
-					Config:        &config.Config{AppID: 12345},
-					WebhookSecret: validSecret,
-				},
+			verifier: &WebhookVerifier{
+				webhookSecret:     validSecret,
 				validateSignature: newMockValidateSignature(nil),
 			},
 			request: &Request{
@@ -151,13 +131,14 @@ func TestHandler_validateRequest(t *testing.T) {
 				Headers: map[string]string{
 					headerXGitHubHookInstallationTargetID: "12345",
 					headerXHubSignature:                   dummySignature,
-					headerXGitHubEvent:                    eventPullRequestReview,
+					headerXGitHubEvent:                    EventTypePullRequestReview,
 				},
 			},
 			wantPayload: true,
 		},
 		{
-			name: "empty headers",
+			name:     "empty headers",
+			verifier: &WebhookVerifier{},
 			request: &Request{
 				Body:    "{}",
 				Headers: map[string]string{},
@@ -169,15 +150,15 @@ func TestHandler_validateRequest(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 
-			payload := tt.controller.verifyWebhook(logger, tt.request)
+			payload := tt.verifier.Verify(logger, tt.request)
 			if tt.wantPayload {
 				if payload == nil {
-					t.Error("validateRequest() returned nil payload")
+					t.Error("Verify() returned nil payload")
 					return
 				}
 				// Verify it's a valid Event
 				if payload.Action == "" {
-					t.Error("verifyWebhook() returned payload without Action field")
+					t.Error("Verify() returned payload without Action field")
 				}
 			}
 		})

@@ -232,7 +232,7 @@ func Test_findCarryForwardApprovers(t *testing.T) { //nolint:funlen
 		t.Run(tt.name, func(t *testing.T) {
 			t.Parallel()
 			ctrl := &Controller{gh: tt.mock}
-			ev := &Event{RepoOwner: "owner", RepoName: "repo"}
+			ev := &github.Event{RepoOwner: "owner", RepoName: "repo"}
 			got := ctrl.findCarryForwardApprovers(context.Background(), discardLogger, ev, tt.pr)
 			if diff := cmp.Diff(tt.want, got); diff != "" {
 				t.Errorf("findCarryForwardApprovers() mismatch (-want +got):\n%s", diff)

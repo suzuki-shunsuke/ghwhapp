@@ -10,7 +10,7 @@ import (
 	"github.com/shurcooL/githubv4"
 	"github.com/suzuki-shunsuke/ghwhapp/pkg/config"
 	"github.com/suzuki-shunsuke/ghwhapp/pkg/github"
-	"github.com/suzuki-shunsuke/ghwhapp/pkg/validation"
+	"github.com/suzuki-shunsuke/ghwhapp/pkg/validate-pr-review-app/validation"
 )
 
 func TestController_newCheckRunInput(t *testing.T) {
@@ -27,7 +27,7 @@ func TestController_newCheckRunInput(t *testing.T) {
 	tests := []struct {
 		name     string
 		config   *config.Config
-		event    *Event
+		event    *github.Event
 		result   *validation.Result
 		expected githubv4.CreateCheckRunInput
 		trust    *config.Trust
@@ -43,7 +43,7 @@ func TestController_newCheckRunInput(t *testing.T) {
 
 				UntrustedMachineUsers: []string{"untrusted-*"},
 			},
-			event: &Event{
+			event: &github.Event{
 				RepoID:  "12345",
 				HeadSHA: "abc123",
 			},
@@ -74,7 +74,7 @@ func TestController_newCheckRunInput(t *testing.T) {
 
 				UntrustedMachineUsers: []string{"untrusted-*"},
 			},
-			event: &Event{
+			event: &github.Event{
 				RepoID:  "12345",
 				HeadSHA: "abc123",
 			},
@@ -104,7 +104,7 @@ func TestController_newCheckRunInput(t *testing.T) {
 
 				UntrustedMachineUsers: []string{"untrusted-*"},
 			},
-			event: &Event{
+			event: &github.Event{
 				RepoID:  "12345",
 				HeadSHA: "abc123",
 			},
@@ -135,7 +135,7 @@ func TestController_newCheckRunInput(t *testing.T) {
 
 				UntrustedMachineUsers: []string{"untrusted-*"},
 			},
-			event: &Event{
+			event: &github.Event{
 				RepoID:  "12345",
 				HeadSHA: "abc123",
 			},
@@ -172,7 +172,7 @@ func TestController_newCheckRunInput(t *testing.T) {
 
 				UntrustedMachineUsers: []string{"untrusted-*"},
 			},
-			event: &Event{
+			event: &github.Event{
 				RepoID:  "12345",
 				HeadSHA: "abc123",
 			},
@@ -210,7 +210,7 @@ func TestController_newCheckRunInput(t *testing.T) {
 
 				UntrustedMachineUsers: []string{"untrusted-*"},
 			},
-			event: &Event{
+			event: &github.Event{
 				RepoID:  "12345",
 				HeadSHA: "abc123",
 			},

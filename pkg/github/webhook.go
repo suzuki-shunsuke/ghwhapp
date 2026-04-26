@@ -1,4 +1,4 @@
-package controller
+package github
 
 import (
 	"encoding/json"
@@ -9,7 +9,6 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/suzuki-shunsuke/ghwhapp/pkg/github"
 	"github.com/suzuki-shunsuke/slog-error/slogerr"
 )
 
@@ -23,29 +22,38 @@ const (
 	headerXGitHubHookInstallationTargetID = "X-GITHUB-HOOK-INSTALLATION-TARGET-ID"
 	headerXHubSignature                   = "X-HUB-SIGNATURE"
 	headerXGitHubEvent                    = "X-GITHUB-EVENT"
-	eventPullRequestReview                = "pull_request_review"
-	eventPullRequest                      = "pull_request"
-	eventInstallation                     = "installation"
-	eventCheckSuite                       = "check_suite"
+
+	EventTypePullRequestReview = "pull_request_review"
+	EventTypePullRequest       = "pull_request"
+	EventTypeInstallation      = "installation"
+	EventTypeCheckSuite        = "check_suite"
 )
 
-func (c *Controller) verifySignature(body []byte, headers map[string]string) error {
-	sig, ok := headers[headerXHubSignature]
-	if !ok {
-		return errHeaderXHubSignatureIsRequired
-	}
-	return c.validateSignature(sig, body, c.input.WebhookSecret)
+type Request struct {
+	// Generate template > Method request passthrough
+	Body      string            `json:"body"`
+	Headers   map[string]string `json:"header"`
+	RequestID string            `json:"requestid"`
 }
 
-func (c *Controller) normalizeHeaders(headers map[string]string) map[string]string {
-	hs := make(map[string]string, len(headers))
-	for k, v := range headers {
-		hs[strings.ToUpper(k)] = v
-	}
-	return hs
+type WebhookVerifier struct {
+	validateSignature func(signature string, payload, secretToken []byte) error
+	webhookSecret     []byte
 }
 
-func (c *Controller) verifyWebhook(logger *slog.Logger, req *Request) *Event { //nolint:cyclop
+type ParamNewWebhookVerifier struct {
+	ValidateSignature func(signature string, payload, secretToken []byte) error
+	WebhookSecret     []byte
+}
+
+func NewWebhookVerifier(param *ParamNewWebhookVerifier) *WebhookVerifier {
+	return &WebhookVerifier{
+		validateSignature: param.ValidateSignature,
+		webhookSecret:     param.WebhookSecret,
+	}
+}
+
+func (c *WebhookVerifier) Verify(logger *slog.Logger, req *Request) *Event { //nolint:cyclop
 	headers := c.normalizeHeaders(req.Headers)
 	body := []byte(req.Body)
 	if err := c.verifySignature(body, headers); err != nil {
@@ -59,22 +67,22 @@ func (c *Controller) verifyWebhook(logger *slog.Logger, req *Request) *Event { /
 		return nil
 	}
 	switch evType {
-	case eventPullRequestReview:
-		payload := &github.PullRequestReviewEvent{}
+	case EventTypePullRequestReview:
+		payload := &PullRequestReviewEvent{}
 		if err := json.Unmarshal(body, payload); err != nil {
 			logger.Warn("parse a webhook payload", "error", err)
 			return nil
 		}
 		return newPullRequestReviewEvent(payload)
-	case eventPullRequest:
-		payload := &github.PullRequestEvent{}
+	case EventTypePullRequest:
+		payload := &PullRequestEvent{}
 		if err := json.Unmarshal(body, payload); err != nil {
 			logger.Warn("parse a webhook payload", "error", err)
 			return nil
 		}
 		return newPullRequestEvent(payload)
-	case eventCheckSuite:
-		payload := &github.CheckSuiteEvent{}
+	case EventTypeCheckSuite:
+		payload := &CheckSuiteEvent{}
 		if err := json.Unmarshal(body, payload); err != nil {
 			logger.Warn("parse a webhook payload", "error", err)
 			return nil
@@ -84,13 +92,29 @@ func (c *Controller) verifyWebhook(logger *slog.Logger, req *Request) *Event { /
 			slogerr.WithError(logger, err).Warn("create event from check suite event")
 		}
 		return ev
-	case eventInstallation:
+	case EventTypeInstallation:
 		logger.Info("ignore the event", "event_type", evType)
 		return nil
 	default:
 		logger.Warn("ignore the event", "event_type", evType)
 		return nil
 	}
+}
+
+func (c *WebhookVerifier) verifySignature(body []byte, headers map[string]string) error {
+	sig, ok := headers[headerXHubSignature]
+	if !ok {
+		return errHeaderXHubSignatureIsRequired
+	}
+	return c.validateSignature(sig, body, c.webhookSecret)
+}
+
+func (c *WebhookVerifier) normalizeHeaders(headers map[string]string) map[string]string {
+	hs := make(map[string]string, len(headers))
+	for k, v := range headers {
+		hs[strings.ToUpper(k)] = v
+	}
+	return hs
 }
 
 type Event struct {
@@ -105,9 +129,9 @@ type Event struct {
 	HeadSHA      string
 }
 
-func newPullRequestReviewEvent(ev *github.PullRequestReviewEvent) *Event {
+func newPullRequestReviewEvent(ev *PullRequestReviewEvent) *Event {
 	return &Event{
-		EventType:    eventPullRequestReview,
+		EventType:    EventTypePullRequestReview,
 		Action:       ev.GetAction(),
 		RepoFullName: ev.GetRepo().GetFullName(),
 		RepoOwner:    ev.GetRepo().GetOwner().GetLogin(),
@@ -119,9 +143,9 @@ func newPullRequestReviewEvent(ev *github.PullRequestReviewEvent) *Event {
 	}
 }
 
-func newPullRequestEvent(ev *github.PullRequestEvent) *Event {
+func newPullRequestEvent(ev *PullRequestEvent) *Event {
 	return &Event{
-		EventType:    eventPullRequest,
+		EventType:    EventTypePullRequest,
 		Action:       ev.GetAction(),
 		RepoFullName: ev.GetRepo().GetFullName(),
 		RepoOwner:    ev.GetRepo().GetOwner().GetLogin(),
@@ -156,7 +180,7 @@ func getPRNumberFromBranch(logger *slog.Logger, branch string) (int, error) {
 	return n, nil
 }
 
-func newCheckSuiteEvent(logger *slog.Logger, ev *github.CheckSuiteEvent) (*Event, error) {
+func newCheckSuiteEvent(logger *slog.Logger, ev *CheckSuiteEvent) (*Event, error) {
 	// e.g. refs/heads/gh-readonly-queue/main/pr-24-a9d10f59f8c051673f45263c42aca8346614e716
 	prNumber, err := getPRNumberFromBranch(logger, ev.GetCheckSuite().GetHeadBranch())
 	if err != nil {
@@ -167,7 +191,7 @@ func newCheckSuiteEvent(logger *slog.Logger, ev *github.CheckSuiteEvent) (*Event
 		return nil, nil //nolint:nilnil
 	}
 	return &Event{
-		EventType:    eventCheckSuite,
+		EventType:    EventTypeCheckSuite,
 		Action:       ev.GetAction(),
 		RepoFullName: ev.GetRepo().GetFullName(),
 		RepoOwner:    ev.GetRepo().GetOwner().GetLogin(),
