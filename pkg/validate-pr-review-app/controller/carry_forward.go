@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"log/slog"
+	"slices"
 
 	"github.com/suzuki-shunsuke/ghwhapp/pkg/config"
 	"github.com/suzuki-shunsuke/ghwhapp/pkg/github"
@@ -62,9 +63,7 @@ func (c *Controller) carryForwardCheck(ctx context.Context, logger *slog.Logger,
 func (c *Controller) findCarryForwardApprovers(ctx context.Context, logger *slog.Logger, ev *github.Event, pr *github.PullRequest) map[string]*github.User {
 	prCommitSHAs := buildPRCommitSHAs(pr)
 	// Walk commits from newest to oldest.
-	for i := len(pr.Commits) - 1; i >= 0; i-- {
-		commit := pr.Commits[i]
-
+	for _, commit := range slices.Backward(pr.Commits) {
 		// Check if this commit has reviews.
 		if approvers, ok := pr.ApproversByCommit[commit.SHA]; ok && len(approvers) > 0 {
 			logger.Info("found reviewed commit for carry-forward",
