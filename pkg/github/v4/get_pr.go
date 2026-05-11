@@ -7,13 +7,19 @@ import (
 	"github.com/shurcooL/githubv4"
 )
 
+const (
+	varRepoOwner = "repoOwner"
+	varRepoName  = "repoName"
+	varNumber    = "number"
+)
+
 // GetPR gets a pull request reviews and committers via GitHub GraphQL API.
 func (c *Client) GetPR(ctx context.Context, owner, name string, number int) (*PullRequest, error) {
 	q := &GetPRQuery{}
 	variables := map[string]any{
-		"repoOwner": githubv4.String(owner),
-		"repoName":  githubv4.String(name),
-		"number":    githubv4.Int(number), //nolint:gosec
+		varRepoOwner: githubv4.String(owner),
+		varRepoName:  githubv4.String(name),
+		varNumber:    githubv4.Int(number), //nolint:gosec
 	}
 	if err := c.v4Client.Query(ctx, q, variables); err != nil {
 		return nil, fmt.Errorf("get a pull request by GitHub GraphQL API: %w", err)
@@ -45,10 +51,10 @@ func (c *Client) GetPR(ctx context.Context, owner, name string, number int) (*Pu
 func (c *Client) ListReviews(ctx context.Context, owner, name string, number int, cursor string) ([]*Review, error) {
 	var reviews []*Review
 	variables := map[string]any{
-		"repoOwner": githubv4.String(owner),
-		"repoName":  githubv4.String(name),
-		"number":    githubv4.Int(number), //nolint:gosec
-		"cursor":    githubv4.String(cursor),
+		varRepoOwner: githubv4.String(owner),
+		varRepoName:  githubv4.String(name),
+		varNumber:    githubv4.Int(number), //nolint:gosec
+		"cursor":     githubv4.String(cursor),
 	}
 	for range 100 {
 		q := &ListReviewsQuery{}
@@ -69,10 +75,10 @@ func (c *Client) ListReviews(ctx context.Context, owner, name string, number int
 func (c *Client) ListCommits(ctx context.Context, owner, name string, number int, cursor string) ([]*PullRequestCommit, error) {
 	var commits []*PullRequestCommit
 	variables := map[string]any{
-		"repoOwner": githubv4.String(owner),
-		"repoName":  githubv4.String(name),
-		"number":    githubv4.Int(number), //nolint:gosec
-		"cursor":    githubv4.String(cursor),
+		varRepoOwner: githubv4.String(owner),
+		varRepoName:  githubv4.String(name),
+		varNumber:    githubv4.Int(number), //nolint:gosec
+		"cursor":     githubv4.String(cursor),
 	}
 	for range 100 {
 		q := &ListCommitsQuery{}
