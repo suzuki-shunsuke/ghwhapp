@@ -1,6 +1,6 @@
 module github.com/suzuki-shunsuke/ghwhapp
 
-go 1.27.0
+go 1.27.1
 
 require (
 	cloud.google.com/go/secretmanager v1.21.0
